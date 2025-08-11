@@ -1,0 +1,6 @@
+Histogramme des frequences (tri decroissant) :
+Valeur +42 : ****
+Valeur -34 : **
+Valeur +99 : **
+Valeur +66 : *
+Valeur +03 : *

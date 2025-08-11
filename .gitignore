@@ -1,0 +1,45 @@
+# Build artifacts (Windows/Linux/macOS)
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.lib
+*.a
+*.exp
+*.ilk
+*.pdb
+*.out
+*.map
+*.mod
+*.lst
+*.log
+
+# Tool/IDE folders
+.vscode/
+.vs/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Make/CMake/Autotools common outputs
+CMakeFiles/
+CMakeCache.txt
+cmake-build*/
+Makefile*
+configure
+config.log
+config.status
+build/
+bin/
+lib/
+
+# ODBC/SQLite demo local databases (if generated)
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
