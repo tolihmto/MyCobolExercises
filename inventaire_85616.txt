@@ -1,0 +1,7 @@
+TVA= 20
+G34       |Vélo               |  1050.45|       1
+G67       |Poire               |     2.30|      34
+H23       |Tomates             |     2.56|      30
+R45       |Verre d'eau         |     4.34|      12
+A01       |Banane              |     2.33|      20
+L23       |Arbustres           |    12.67|       3

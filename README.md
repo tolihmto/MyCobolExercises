@@ -38,8 +38,11 @@ Vérifier l’installation de GnuCOBOL:
   - `14_tableau_recherche.cbl` (recherche)
   - `15_tableau_doublons.cbl` (doublons)
   - `16_tableau_occurs_histo.cbl` (histogramme avec OCCURS)
+  - `23_som_moy.cbl` (somme et moyenne — variantes)
+  - `24_som_moy_extra.cbl` (somme/moyenne, contrôles supplémentaires)
 - Fichiers
   - `17_lecture_fichier.cbl` (lecture ligne à ligne, comptage de mots; usage: `./lecture_fichier_17 <chemin-fichier>`)
+  - `25_inventaire.cbl` (inventaire rechargeable: saisie/tri/affichage, totaux & TVA, sauvegarde/chargement)
 - Couleurs ANSI / TUI
   - `18_output_colors.cbl` (exemples de styles/couleurs)
   - `19_ansi_colors.cbl` (catalogue structuré des couleurs/styles)
@@ -90,6 +93,42 @@ Vérifier l’installation de GnuCOBOL:
 
 - `call_fibonacci/call_fibonacci.cbl`
   - Montre l’appel d’un autre programme COBOL (`CALL 'FIBONACCI'`). Compiler/placer les binaires dans le même répertoire/exécutable selon l’outil.
+
+- `25_inventaire.cbl`
+
+  - Petit gestionnaire d’inventaire en console.
+  - Fonctionnalités:
+    - Saisie d’articles: `CODE`, `LIBELLE`, `PU` (prix unitaire), `QTE`.
+    - Anti‑doublon sur `CODE` via le paragraphe `DUP-CODE`.
+    - Option de chargement d’une sauvegarde détectée au démarrage.
+    - Tri décroissant par montant (`PU*QTE`).
+    - Affichage tabulaire puis totaux: `TOTAL QTE`, `TOTAL HT`, et `TVA %  TOTAL TTC`.
+    - Sauvegarde automatique dans `inventaire_#####.txt` (nom aléatoire) au format texte.
+  - TVA (par défaut 20%). Peut être passée en argument (ex: `./25_inventaire 10` pour 10%).
+  - Utilisation:
+    - Compilation: `cobc -x 25_inventaire.cbl`
+    - Exécution: `./25_inventaire [tva]`
+    - Lorsqu’une sauvegarde existe, le programme propose de la recharger, puis vous pouvez continuer la saisie.
+  - Format de sauvegarde (`LINE SEQUENTIAL`, lisible et rechargeable):
+    - Première ligne: `TVA=nn`
+    - Lignes suivantes: `CODE|LIB|PU|QTE` où `PU` et `QTE` sont en format texte édité.
+    - Exemple:
+      ```
+      TVA= 20
+      A01|Banane|   2.33|      20
+      G34|Velo  |1050.45|       1
+      ```
+  - Exemple d’affichage des totaux:
+    ```
+    CODE        LIBELLE                    PU          QTE       MONTANT
+    A02         Cahier                     2.50         5        12.50
+    A03         Classeur                   4.00         3        12.00
+    A01         Stylo                      1.20        10        12.00
+    --------------------------------------------------------------
+    TOTAL QTE:                     18
+    TOTAL HT :                 36.50
+    TVA  20%  TOTAL TTC:       43.80
+    ```
 
 ## SQL/ODBC (SQLite)
 
