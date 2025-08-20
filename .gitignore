@@ -27,7 +27,6 @@ Thumbs.db
 CMakeFiles/
 CMakeCache.txt
 cmake-build*/
-Makefile*
 configure
 config.log
 config.status

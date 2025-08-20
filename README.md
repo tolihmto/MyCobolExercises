@@ -61,6 +61,10 @@ Vérifier l’installation de GnuCOBOL:
 - Divers
   - `02_album_example.cbl`, `sql_example.cbl` (illustrations supplémentaires)
 
+- Applications / GUI + Backend
+  - `26_atm_gui/atm_backend.cbl` (backend ATM en COBOL, persistance JSON)
+  - `26_atm_gui/atm_gui.cpp` (GUI C++/SFML qui dialogue avec le backend)
+
 ## Détails et exécutions notables
 
 - `17_lecture_fichier.cbl`
@@ -92,6 +96,7 @@ Vérifier l’installation de GnuCOBOL:
   - Utile pour illustrer la gestion de grands nombres au-delà des types natifs.
 
 - `call_fibonacci/call_fibonacci.cbl`
+
   - Montre l’appel d’un autre programme COBOL (`CALL 'FIBONACCI'`). Compiler/placer les binaires dans le même répertoire/exécutable selon l’outil.
 
 - `25_inventaire.cbl`
@@ -129,6 +134,25 @@ Vérifier l’installation de GnuCOBOL:
     TOTAL HT :                 36.50
     TVA  20%  TOTAL TTC:       43.80
     ```
+
+- `26_atm_gui` (ATM backend + GUI SFML)
+
+  - Fichiers clés:
+    - Backend COBOL: `26_atm_gui/atm_backend.cbl` → binaire `atm_backend`
+    - Interface C++/SFML: `26_atm_gui/atm_gui.cpp` → binaire `atm_gui`
+    - Données: `26_atm_gui/users.json` (liste d’utilisateurs: `hash-carte`, `pin`, `solde`)
+  - Fonctionnement:
+    - La GUI envoie des requêtes JSON au backend via pipes; réponses en NDJSON.
+    - Opérations: login, consultation de solde, dépôt, retrait, sortie.
+    - Le backend persiste les soldes dans `users.json` après dépôt/retrait.
+  - Compilation/Exécution:
+    - Avec `Makefile` dans `26_atm_gui/` (g++, GnuCOBOL, SFML requis):
+      ```
+      make -C 26_atm_gui
+      make -C 26_atm_gui run
+      ```
+    - Sinon, compiler manuellement: `cobc -x -o atm_backend atm_backend.cbl` et
+      `g++ -std=c++17 atm_gui.cpp -o atm_gui $(pkg-config --cflags --libs sfml-graphics sfml-window sfml-system)`
 
 ## SQL/ODBC (SQLite)
 
